@@ -1,0 +1,283 @@
+<!-- sign up and log in html page -->
+
+{% extends 'layout.html' %} {% block body %}
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: #659dbd;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .index {
+    width: 45rem;
+    height: 35rem;
+    position: absolute;
+    bottom: 0;
+    top: 3rem;
+    right: 20px;
+    background: #fff;
+    color: #000;
+  }
+
+  .signup {
+    margin-left: 7rem;
+    margin-top: 5rem;
+  }
+
+  .signup h1 {
+    color: #00000094;
+  }
+
+  .signup input {
+    width: 30rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+    border: 1px solid #c4c4c4;
+  }
+
+  .signup input.input--first {
+    margin-top: 2rem;
+  }
+
+  .signup button {
+    width: 30rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 0;
+  }
+
+  .signup button:hover {
+    color: #000;
+    background: #659dbd;
+  }
+
+  .cta {
+    background: #659dbd;
+    color: #ffffff;
+    width: 10rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+  }
+
+  .cta:hover {
+    color: #000;
+    background: #f1f1f1;
+    cursor: pointer;
+  }
+
+  .cta--colored {
+    background: #bd8265;
+  }
+
+  .login {
+    width: 500px;
+    height: 500px;
+    margin-top: 5rem;
+  }
+
+  .login input {
+    width: 100%;
+    margin: 2rem;
+    margin-left: 0;
+    margin-bottom: 0;
+    padding: 0.5rem 1rem;
+    outline: #fff;
+    border: #fff;
+  }
+
+  .login input:focus {
+    background: #fff;
+    border: #fff;
+    outline: #fff;
+  }
+
+  .login button {
+    width: 100%;
+    margin: 2rem;
+    margin-left: 0;
+    margin-bottom: 0;
+    padding: 1rem 0;
+    outline: none;
+    border: 0;
+  }
+
+  .login button:hover {
+    background: #bd8265;
+  }
+
+  .services {
+    position: absolute;
+    left: 1rem;
+    top: 5rem;
+    padding: 3rem;
+  }
+
+  .flex-container {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+    }
+    .flex-container {
+      display: block;
+      flex-direction: column;
+    }
+
+    .signup--div {
+      margin: 2rem 2rem;
+    }
+
+    .signup--div h1{
+      margin-bottom: 2rem;
+    }
+    .signup--div input{
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border: none;
+      outline: #fff;
+      border-radius: 2rem;
+    }
+
+    .signup--div button{
+      background-color: #bd8265;
+      border: none;
+      padding:1rem;
+      border-radius: 2rem;
+    }
+
+    .signup--div button:hover{
+    color: #000;
+    background: #bd8265;
+    }
+
+    .signup--div p{
+      margin-bottom:2rem;
+      color: #bd8265;
+    }
+
+     .signup--div a{
+      margin-bottom:2rem;
+      color: #bd8265;
+    }
+    
+     .div--web-first {
+      display: none;
+    }
+
+     .login--div {
+      margin: 5rem 2rem;
+    }
+
+    .login--div h1{
+      margin-bottom: 2rem;
+    }
+    .login--div input{
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border: none;
+      outline: #fff;
+      border-radius: 2rem;
+    }
+
+    .login--div button{
+      background-color: #bd8265;
+      border: none;
+      padding:1rem;
+      border-radius: 2rem;
+    }
+
+    .login--div button:hover{
+    color: #000;
+    background: #bd8265;
+    }
+
+    .login--div p{
+      margin-bottom:2rem;
+      color: #bd8265;
+    }
+
+     .login--div a{
+      margin-bottom:2rem;
+      color: #bd8265;
+    }
+   
+  }
+</style>
+
+<div class="container-fluid div--web-first">
+
+  <form method ="POST" action ="{{url_for('login')}}">
+
+  <div data-aos="fade-right" data-aos-offset="300" data-aos-duration="1500" class="services login">
+    <h1>Log in Here</h1>
+    <input type="email" name="email" placeholder="Email Address" />
+    <input type="password" name="password" placeholder="Password" />
+    <button type="submit" class="cta cta--colored">Log in Here</button>
+  </div>
+  </form>
+
+  <div data-aos="fade-left" data-aos-offset="300" data-aos-duration="1500" class="index">
+    <form method ="POST" action ="{{url_for('signup')}}">
+    <div class="signup">
+      <h1>Sign Up Here</h1>
+      <input class="input--first" name="full_name" type="text" placeholder="Full Name" />
+      <input type="email" name="email" placeholder="Email Address" />
+      <input type="text" name="job_position" placeholder="Job Position" />
+      <input type="Password" name="password" placeholder="Password" />
+      <button type="submit" class="cta">Sign Up Here</button>
+    </div>
+    </form>
+  </div>
+</div>
+
+<!-- I CREATED A WHOLE NEW SIGN UP AND LOGIN DIV FOR MOBILE  -->
+
+<div class="flex-container">
+
+  <form method="POST" action="{{url_for('login')}}">
+    <div data-aos="fade-down" data-aos-offset="200" data-aos-duration="1000" class="login--div" id="login">
+      <p>Not yet registered? <a href="#signup">Sign Up</a></p>
+      <h1>Log in Here</h1>
+      <input type="email" name="email" placeholder="Email Address" />
+      <input type="Password" name="password" placeholder="Password" />
+      <button type="submit" class="cta">Log In Here</button>
+    </div>
+  </form>
+
+  <div data-aos="fade-down" data-aos-offset="200" data-aos-duration="1000" class="signup--div" id="signup">
+     <p>Already registered? <a href="#login">Log In</a></p>
+    <h1>Sign up here</h1>
+    <form method ="POST" action ="{{url_for('signup')}}">
+    <input type="text" name="full_name" placeholder="Full Name" />
+    <input type="email" name="email" placeholder="Email Address" />
+    <input type="text" name="job_position" placeholder="Job Position" />
+    <input type="Password" name="password" placeholder="Password" />
+    <button type="button" class="cta">Sign Up Here</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

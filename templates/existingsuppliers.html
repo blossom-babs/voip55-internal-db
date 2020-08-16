@@ -1,0 +1,209 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<!-- RESPONSIVENESS AT 768PX STILL NEEDS TO BE WORKED ON -->
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    td button {
+        border: none;
+        padding: .5rem 1rem;
+        background: #659DBD;
+        color: white;
+    }
+
+    .edit-btn:hover {
+        border: none;
+        outline-color: #659DBD;
+        background: #fff;
+        color: #659DBD;
+    }
+
+      .danger{
+      background:#cb4154;
+      /* #8B0000 */
+      }
+
+      .danger:hover{
+      border:none;
+      outline-color: #cb4154;
+      background: #fff;
+      color: #cb4154;
+      }
+
+    .search {
+        margin-right: 10rem;
+    }
+
+    .clients-div {
+        margin: 8rem 0 0 20rem;
+    }
+
+    .table {
+        width: 80%;
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .alert {
+        display: none;
+    }
+
+    @media(max-width: 1024px) {
+        .table {
+            width: 70%;
+        }
+    }
+
+    @media (min-width: 2000px) {
+        .clients-div {
+            /* margin: 8rem 0 0 20rem; */
+            margin-left: 50rem;
+        }
+    }
+
+    @media (max-width: 800px) {
+        body {
+            background-color: #f1f1f1;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .clients-div {
+            margin-left: 15rem;
+            margin-top: 0;
+        }
+
+        .table {
+            width: 10%;
+        }
+
+    }
+
+    @media (max-width: 500px) {
+        .clients-div {
+            display: none
+        }
+
+        .alert {
+            display: block;
+        }
+
+        .alert h1 {
+            margin: 2rem 0 0 15rem;
+            border: 2px solid #659DBD;
+            font-size: 1rem;
+            font-weight: bolder;
+        }
+    }
+</style>
+
+<div class="container clients-div">
+
+    <div class="flex">
+        <div>
+            <h1 class="clients-headings">Existing Supplier's Details</h1>
+            <p class>Click for more details. Click to edit</p>
+        </div>
+
+        <div class="search">
+            <form class="form-inline my-2 my-lg-0" action="/suppliersearch" method="post">
+                <input class="form-control mr-sm-2" type="search" name="search_supplier">
+                <button class="btn clients-button my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
+    </div>
+
+    {% if existing_suppliers_information|length < 1 %}
+    Information not found!
+    {% else %}
+
+    <table class="table table-lg table-hover table-bordered">
+        <tr class="clients-headings">
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th></th>
+            <th style="color:#cb4154;"><i class="fas fa-trash"></i></th>
+        </tr>
+
+        {% for sth in existing_suppliers_information %}
+        <tr>
+   
+
+            <td>{{sth.supplierName}}</td>
+            <td>{{sth.supplierContacts}}</td>
+            <td>{{sth.supplierEmail}}</td>
+            <td class="clickable-row" data-href="{{url_for('existingsupplier', pk=sth.pk)}}">
+                <button class="edit-btn">Edit</button>
+                </td>
+            <td>
+                 <button class="btn btn-outline-danger" onclick="deleteSup(this)" id="delete_supplier" data-attribute="delete"
+                     data-value="{{sth.pk}}">Delete</button>
+              
+            </td>
+        </tr>
+   
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+
+<div class="alert">
+    <h1>Oops! <br> this is not <br> available <br> on your device.</h1>
+    <h1>Oops! <br> this is not <br> available <br> on your device.</h1>
+    <h1>Oops! <br> this is not <br> available <br> on your device.</h1>
+    <h1> Try on a <br> larger <br> device.</h1>
+</div>
+
+</div>
+
+<script>
+    function deleteSup(button){
+    console.log("clicked")
+    const actionOnSupplier = button.dataset.attribute
+    const supplier = button.dataset.value
+
+    const deletedSupplierData = {supplier_id: supplier, action:actionOnSupplier}
+
+    $.ajax({
+    type: "POST",
+    url: "/deletedSupplier",
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    data: JSON.stringify(deletedSupplierData),
+    success: function(data, status, jqXHR) {
+    window.location.href = "/existingSuppliers";
+    }
+    });
+    console.log(deletedSupplierData);
+    }
+
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+
+{% endblock %}

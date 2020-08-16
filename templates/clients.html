@@ -1,0 +1,206 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .search {
+        margin-right: 20rem;
+    }
+
+    .clients-div {
+        margin: 8rem 0 0 20rem;
+    }
+
+    .table {
+        width: 80%;
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    /* tr:nth-child(odd) {
+        background-color: #659DBD;
+        color: #fff;
+    } */
+
+    td button{
+        border:none;
+        padding: .5rem 1rem;
+        background: #659DBD;
+        color: white;
+    }
+       .edit-btn:hover{
+       border:none;
+       outline-color: #659DBD;
+       background: #fff;
+       color: #659DBD;
+       }
+
+    .danger{
+        background:#cb4154; 
+        /* #8B0000 */
+    }
+
+     .danger:hover{
+      border:none;
+      outline-color: #cb4154;
+      background: #fff;
+      color: #cb4154;
+     }
+
+    .alert{
+        display: none;
+    }
+
+    @media(max-width: 1024px){
+        .table{
+            width:70% ;
+        }
+    }
+
+    @media (min-width: 2000px){
+         .clients-div {
+         /* margin: 8rem 0 0 20rem; */
+         margin-left: 50rem;
+         }
+    }
+
+      @media (max-width: 800px){
+          body{
+ background-color: #f1f1f1;
+          }
+
+           .flex {
+           display: flex;
+           flex-direction: column;
+          
+           }
+
+              .clients-div {
+              margin-left: 15rem;
+              margin-top: 0;
+              
+              }
+  
+      }
+
+      @media (max-width: 500px){
+          .clients-div{
+              display:none
+          }
+
+          .alert{
+              display: block;
+          }
+
+          .alert h1{
+              margin: 2rem 0 0 15rem;
+              border: 2px solid #659DBD;
+              font-size: 1rem;
+              font-weight: bolder;
+          }
+      }
+</style>
+
+<div class="container clients-div">
+
+    <div class="flex">
+        <div class="">
+            <h1 class="clients-headings">Client's Details</h1>
+            <p class>Click for more details. Click to edit</p>
+        </div>
+
+        <div class="search">
+            <form class="form-inline my-2 my-lg-0" method="post" action="/search">
+                <input class="form-control mr-sm-2" type="search" name="search">
+                <button class="btn clients-button my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
+    </div>
+
+    {% if people|length < 1 %}
+    No client found!
+    {% else %}
+
+    <table class="table table-lg table-hover table-bordered">
+
+        <tr class="clients-headings ">
+            <th>Business Name</th>
+            <th>Customer Ref</th>
+            <th>Client Name</th>
+            <th></th>
+            <th style="color:#cb4154;"><i class="fas fa-trash"></i></th>
+        </tr>
+
+        {% for p in people %}
+        <tr >
+            <td>{{p.business_name}}</td>
+            <td>{{p.customer_ref}}</td>
+            <td>{{p.client_name}}</td>
+            <td class="clickable-row"  data-href="{{url_for('client', pk=p.pk)}}">
+                <button class="edit-btn"> Edit</button>
+               </td>
+            <td>
+             <button class="btn btn-outline-danger" onclick="deleteEl(this)" id="delete_client"
+             data-attribute="delete" data-value="{{p.pk}}">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
+</div>
+
+<div class="alert">
+<h1>Oops! <br> this is not <br> available <br> on your device.</h1>
+<h1>Oops! <br> this is not <br> available <br> on your device.</h1>
+<h1>Oops! <br> this is not <br> available <br> on your device.</h1>
+<h1> Try on a <br> larger <br> device.</h1>
+</div>
+
+<script>
+function deleteEl (button){
+    console.log("clicked") 
+    const actionOnClient = button.dataset.attribute
+    const client = button.dataset.value
+
+const deletedClientData = {clients_id: client, action:actionOnClient}
+
+ $.ajax({
+ type: "POST",
+ url: "/deletedClient",
+ contentType: "application/json; charset=utf-8",
+ crossDomain: true,
+ dataType: "json",
+ data: JSON.stringify(deletedClientData),
+ success: function(data, status, jqXHR) {
+   window.location.href = "/clients";
+ }
+ });
+ console.log(deletedClientData);
+
+}
+
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+
+    
+</script>
+
+{% endblock %}

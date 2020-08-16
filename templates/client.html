@@ -1,0 +1,225 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<style>
+    .card{
+    
+        width: 100%;
+   
+    }
+
+     @media screen and (max-width: 800px) {
+     .card {
+     width: 500px;
+   margin-top: 0;
+     }
+     }
+</style>
+
+<section id="addclient-section" class="div-main main">
+    <div class="container">
+
+<form action="{{url_for('edit', pk=client_id)}}" data-client={{client_id}} method="post" id="form">
+
+<!-- PERSONAL DETAILS -->
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="headings">Personal Details</h3>
+                <p class="paragraph">Clients personal details should be entered here: <br>These are relevant information pertaining to the customer.</p>
+
+             <div class="row mt-5">
+            <div class="col-lg-6 ">
+
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input class="form-control" type="text" value="{{business_name}}" name="business_name">
+               </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input class="form-control" type="text" value="{{address}}" name="address">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                   <input class="form-control" type="text" value="{{email}}" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Customer Reference</label>
+                    <input class="form-control" type="text" value="{{customer_ref}}" name="customer_ref">
+                </div>
+        </div>
+
+        <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Telephone Number</label>
+                    <input class="form-control" type="text" name="telephone_num1" value="{{telephone_num1}}">
+                </div>
+                <div class="form-group">
+                    <label>Telephone Number 2</label>
+                   <input class="form-control" type="text" name="telephone_num2" value="{{telephone_num2}}">
+                </div>
+                <div class="form-group">
+                    <label>Telephone Number 3</label>
+                    <input class="form-control" type="text" name="telephone_num3" value="{{telephone_num3}}">
+                </div>
+                <div class="form-group">
+                    <label>Client Name</label>
+                    <input class="form-control" type="text" name="client_name" value="{{client_name}}">
+                </div>
+        </div>
+         </div>
+        </div>
+    </div>
+
+<!--                        SERVICES PROVIDED -->
+
+    <div data-aos="fade-left" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+        <div class="card-body">
+       <div class="flex justify-content-between align-items-center">
+          <h3 class="headings">Services Provided</h3>
+           <div>
+               <button onclick="myCreateFunction()" type="button" class="button-plus"><i class="fas fa-plus"></i></button>
+               <button onclick="myDeleteFunction()" type="button" class="button-icon"><i class="fas fa-trash"></i></button>
+           </div>
+       </div>
+            <hr><br>
+              <p class="paragraph">Fill in the inputs with the appropriate service given to the customer as well as <br> the type
+                    of specific services we have with them</p>
+        <table id="service_provided" class="tableid mt-4 w-100">
+                {% for service in services %}
+                <tr>
+                <td><input class="form-control" type="text" name="name"  value="{{service.name}}"></td>
+                <td><input class="form-control" type="text" name="contract"  value="{{service.contract}}"></td>
+                <td><input class="form-control" type="text" name="payg" value="{{service.payg}}"></td>
+            </tr>
+            {% endfor %}
+        </table>
+            </div>
+    </div>
+
+<!--                PASSWORDS AND DOCUMENTATIONS -->
+
+    <div data-aos="fade-right" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+        <div class="card-body">
+            <div class="flex justify-content-between align-items-center">
+                 <h3 class="headings">Password and docs</h3>
+                <div>
+                    <button onclick="myCreateFunction2()" type="button"class="button-plus"><i class="fas fa-plus"></i></button>
+                    <button onclick="myDeleteFunction2()" type="button" class="button-icon"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <hr><br>
+
+         <p class="paragraph">Passwords of services provided to clients as well as the documentations <br>
+            or description of this service.</p>
+
+       <table id="passwords" class="tableid2 some mt-4 w-100">
+           {% for password in passwords %}
+           <tr>
+                <td><input class="form-control" type="text" name="option_1" value="{{password.option_1}}"></td>
+                <td><input class="form-control" type="text" name="option_2" value="{{password.option_2}}"></td>
+                <td><input class="form-control" type="text" name="other_options" value="{{password.other_options}}"></td>
+
+               <td><button onclick="openForm('demo_{{loop.index}}')" type="button" class="btn btn-light">
+                   <i class="fa fa-comment butter-color"></i><em>Description</em></button></td>
+               <td><input type="file" class="form-control" name="file_upload" value="{{password.file_upload}}"></td>
+               <td>
+                <div class="chat-popup" id="demo_{{loop.index}}">
+               <textarea class="textarea" name="description">{{password.description}}</textarea>
+               <button onclick="closeForm('demo_{{loop.index}}')" type="button" class="btn btn-sm btn-outline-success">Done</button>
+                </div>
+                </td>
+            </tr>
+           {% endfor %}
+        </table>
+            </div>
+    </div>
+
+<!-- HELP DESK | RECENT TASKS -->
+
+    <div data-aos="fade-left" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="headings">Recent Tasks</h3>
+                <div>
+                <button onclick="myCreateFunction3()" type="button"class="button-plus"><i class="fas fa-plus"></i></button>
+                <button onclick="myDeleteFunction3()" type="button" class="button-icon"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+           <p class="paragraph">Help services Customers call in to get should be recorded here. <br>
+           Detailed with the timeline, who was on duty as well as the help service rendered.</p>
+
+        <table id="helpdesk_service" class="some tableid3 mt-4 w-100">
+                {% for helpdesk in helpdesk %}
+            <tr class="trs">
+                {% if helpdesk.date  %}
+                <td><input class="form-control"  type="date" id="date-input" name="date" value="{{helpdesk.date.strftime('%Y-%m-%d')}}"></td>
+                {% else %}
+                <td><input class="form-control" type="date" name="date" value="{{helpdesk.date}}"></td>
+                {% endif %}
+                <td><input class="form-control" type="text" name="staff_on_duty" value="{{helpdesk.staff_on_duty}}"></td>
+
+                <td><button onclick="openForm('demoDesk{{loop.index}}')" type="button" class="btn btn-light">
+                    <i class="fa fa-comment butter-color"></i><em>Description</em></button></td>
+
+                <td>
+                <div class="chat-popup" id="demoDesk{{loop.index}}">
+                    <textarea class="textarea" name="service_request">{{helpdesk.service_request}}</textarea>
+                    <br>
+                    <button  onclick="closeForm('demoDesk{{loop.index}}')" type="button" class="btn btn-sm btn-outline-success">Done</button>
+             </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+            </div>
+    </div>
+
+<!--    OFFICE DEVICES -->
+
+        <div data-aos="fade-right" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="headings">Office Devices</h3>
+                <div>
+                    <button onclick="myCreateFunction4()" type="button" class="button-plus add" data-id="od-group"><i class="fas fa-plus"></i></button>
+                    <button onclick="myDeleteFunction4()" type="button" class="button-icon remove" data-id="od-group"><i class="fas fa-trash"></i></button>
+                </div>
+                </div>
+            <hr><br>
+            <p>client's Office Devices eg. IP address, username and password for Printers, Fax, PBX, Phones, Internet routers, Firewall etc...</p>
+            <table class="tableid4 some mt-4 w-100" id="office_devices">
+                    {% for od in officeDevices %}
+                <tr>
+                    <td><input class="form-control" type="text" name="device" value="{{od.device}}"></td>
+                    <td><input class="form-control" type="text" name="username" value="{{od.username}}"></td>
+                    <td><input class="form-control" type="text" name="password" value="{{od.password}}"></td>
+                    <td> <button onclick="openForm('demoOffice{{loop.index}}')" type="button" class="btn btn-light open-desc">
+                        <i class="fa fa-comment butter-color"></i><em>Configuration</em></button></td>
+                    <td>
+                        <div class="chat-popup" id="demoOffice{{loop.index}}">
+                             <textarea class="textarea" name="configuration">{{od.configuration}}</textarea>
+                            <button onclick="closeForm('demoOffice{{loop.index}}')" type="button" class="btn btn-sm btn-outline-success">Done</button>
+                        </div>
+                    </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+        </div>
+
+<!-- SUBMIT | SAVE BUTTON -->
+
+    <div class="mt-5">
+    <button type="submit" class="btn btn-lg btn-submit">Save</button>
+        </div>
+
+ </form>
+
+    </div>
+</section>
+
+{% endblock %}

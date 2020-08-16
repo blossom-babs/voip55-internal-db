@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .navigation {
+      background: #fff;
+      height: 5rem;
+      padding: 3rem 0;
+      overflow-y: hidden;
+
+    }
+
+    .navigation img {
+      padding-left: 1rem;
+    }
+
+    .navbar-nav {
+      margin-right: 10rem;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+      color: #000;
+      padding: 2rem;
+      font-size: 1rem;
+      font-variant: small-caps;
+      font-weight: 600;
+    }
+
+    .navbar-toggler {
+      background-color: #659DBD;
+    }
+
+    /* SIDE NAVIGATION BAR */
+
+    .sideNav {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 2rem;
+      background-color: #659DBD;
+      overflow-x: hidden;
+
+      /* padding-top: 20px; */
+
+    }
+
+    .sideNav-two {
+      display: none;
+    }
+
+    .sideNav a {
+      margin-top: 3rem;
+      padding: 0 2rem;
+      /* padding-top: 3rem;
+    padding-bottom: 0.5rem; */
+      text-decoration: none;
+      font-size: 1rem;
+      display: block;
+      color: #fff;
+      font-size: 1rem;
+
+    }
+
+    .sideNav .nav-link__first {
+      padding-top: 5rem;
+    }
+
+
+    .sideNav a:hover {
+      color: #000;
+    }
+
+    .div-main {
+      margin-left: 10rem;
+      margin-top: 4rem;
+      overflow-y: hidden;
+    }
+
+
+    @media (max-width: 768px) {
+      .navigation {
+        display: none;
+      }
+
+      .sideNav {
+        display: none;
+      }
+
+      .sideNav-two {
+        display: block;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        background-color: #659DBD;
+        overflow-x: hidden;
+
+        /* padding-top: 20px; */
+
+      }
+
+      .sideNav-two a {
+        margin-top: 3rem;
+        padding: 0 2rem;
+        /* padding-top: 3rem;
+       padding-bottom: 0.5rem; */
+        text-decoration: none;
+        font-size: 1rem;
+        display: block;
+        color: #fff;
+        font-size: 1rem;
+
+      }
+
+       .sideNav-two .nav-link__first {
+       padding-top: 0;
+       }
+
+
+       .sideNav-two a:hover {
+       color: #000;
+       }
+
+    }
+
+    @media (max-width: 500px){
+        .div-main {
+        margin-left: 15rem;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-expand-lg fixed-top navigation">
+    <img src="{{url_for('static', filename='images/e97f6e83-9fb3-4c6a-a262-82075504235d_200x200.png')}}">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+
+  <div class="sideNav">
+
+    <a class="nav-link nav-link__first" href="/addclient">New Clients</a>
+
+    <a class="nav-link" href="/clients"> Existing Clients</a>
+
+    <a class="nav-link" href="/suppliers"> Suppliers</a>
+
+    <a class="nav-link" href="/existingSuppliers"> Existing Suppliers</a>
+
+    <a class="nav-link" href="/trash"> <i class="fas fa-trash"></i>  Trash</a>
+
+
+  </div>
+
+  <!-- ANOTHER MEDIA QUERY -->
+
+  <div class="sideNav-two">
+
+    <img src="{{url_for('static', filename='images/e97f6e83-9fb3-4c6a-a262-82075504235d_200x200.png')}}">
+
+    <a class="nav-link " href="/dashboard">Home</a>
+
+    <a class="nav-link nav-link__first" href="/addclient">New Clients</a>
+
+    <a class="nav-link" href="/clients"> Existing Clients</a>
+
+    <a class="nav-link" href="/suppliers"> Suppliers</a>
+
+    <a class="nav-link" href="/existingSuppliers"> Existing Suppliers</a>
+
+    <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+
+
+  </div>
+
+</body>
+
+</html>

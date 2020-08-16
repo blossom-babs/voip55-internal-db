@@ -1,0 +1,133 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<title>suppliers</title>
+
+<style>
+    .card {
+        width: 100%;
+    }
+
+    th {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: lighter;
+        padding-bottom: 1rem;
+    }
+
+    @media screen and (max-width: 800px) {
+
+        .div-main {
+            margin-left: 5rem;
+        }
+
+        .card {
+            width: 500px;
+        }
+    }
+
+    @media screen and (min-width: 2000px) {
+        .card {
+            width: 50%;
+            margin: auto;
+        }
+    }
+</style>
+
+<div class="div-main main">
+    <form method="post" action="/suppliers" id="suppliers">
+
+        <!-- suppliers info -->
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <h3 class="clients-headings">Suppliers Information</h3>
+                <p>Log personal Information for suppliers here.</p>
+
+                <div id="form-group" class="row mt-5">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="">Name</label>
+                            <input class="form-control" type="text" name="supplierName">
+                        </div>
+                        <div class="form-group">
+                            <label class="">Address</label>
+                            <input class="form-control" type="text" name="supplierAddress">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="">Contact</label>
+                            <input class="form-control" type="text" name="supplierContacts">
+                        </div>
+                        <div class="form-group">
+                            <label class="">Email</label>
+                            <input class="form-control" type="text" name="supplierEmail">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- second table -->
+
+        <div data-aos="fade-up" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+            <div class="card-body">
+                <div class="flex justify-content-between align-items-center">
+                    <h3 class="clients-headings">Supply Information</h3>
+                    <div>
+                        <button type="button" class="button-plus" onclick="suppliersAdd()"><i
+                                class="fas fa-plus"></i></button>
+                        <button type="button" class="button-icon" onclick="suppliersRemove()"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+
+                <hr>
+                <table id="supplyInfo" class="tableid mt-4 w-100">
+                    <tr>
+                        <td><input class="form-control" type="text" placeholder="Service" name="typeOfService"></td>
+                        <td><input class="form-control" type="text" placeholder="Reference" name="paymentRef"></td>
+                        <td><input class="form-control" type="text" placeholder="Amount" name="paymentAmt"></td>
+                        <td><input class="form-control" type="text" placeholder="Customer" name="customer"></td>
+                        <td><input class="form-control" type="text" placeholder="Expiry" name="expiryDate"></td>
+                        <td>
+                            <button onclick="openComment('comment_1')" type="button" class="btn btn-light">
+                                <i class="fa fa-comment butter-color"></i><em>Comment</em></button>
+                        </td>
+                        <td class="commentTD" id="">
+                            <div class="chat-popup commentDiv " id="comment_1">
+                                <textarea class="textarea" name="comment"></textarea>
+                                <button onclick="closeComment('comment_1')" type="button"
+                                    class="btn btn-sm btn-outline-success">Done
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <!--        SUBMIT BUTTON -->
+
+        <div class="mt-5">
+            <button type="submit" id="submitAjax" class="btn btn-lg btn-submit">Submit</button>
+        </div>
+
+    </form> <!-- closing form tag directly before the closing overall div tag -->
+</div> <!-- container closing div -->
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{url_for('static', filename='scriptSuppliers.js')}}">
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,335 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    .main-heading {
+        font-variant: small-caps;
+        border: 3px solid #cb4154;
+        color: #888;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .suppliers-section {
+        margin-top: 3rem;
+    }
+
+    .suppliers-section table tr {
+        text-align: center;
+    }
+
+    .flex-btn {
+        display: flex;
+        flex-direction: columns;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .warning-card {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        left: 5rem;
+        top: 0;
+    }
+
+    .jumbotron {
+        box-shadow: 0px 10px 20px #888;
+        position: absolute;
+        z-index: 1;
+        width: 50%;
+    }
+
+    .jumbotron h1 {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .jumbotron p {
+        margin-top: 2rem;
+        margin-left: 3rem;
+    }
+
+    .jumbotron .btn-sm {
+        margin-top: 3rem;
+        margin-left: 10rem;
+        padding: 1rem;
+    }
+
+
+    td button {
+        border: none;
+        padding: .5rem 1rem;
+        background: #659DBD;
+        color: white;
+    }
+
+    .edit-btn:hover {
+        border: none;
+        outline-color: #659DBD;
+        background: #fff;
+        color: #659DBD;
+    }
+
+    .danger {
+        background: #cb4154;
+        /* #8B0000 */
+    }
+
+    .danger:hover {
+        border: none;
+        outline-color: #cb4154;
+        background: #fff;
+        color: #cb4154;
+    }
+
+    @media(max-width: 1024px) {
+        .table {
+            width: 70%;
+        }
+    }
+
+    @media (min-width: 2000px) {
+        .clients-div {
+            /* margin: 8rem 0 0 20rem; */
+            margin-left: 50rem;
+        }
+    }
+
+    @media (max-width: 800px) {
+        body {
+            background-color: #f1f1f1;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .clients-div {
+            margin-left: 15rem;
+            margin-top: 0;
+
+        }
+
+    }
+
+    @media (max-width: 500px) {
+        .clients-div {
+            display: none
+        }
+
+        .alert {
+            display: block;
+        }
+
+        .alert h1 {
+            margin: 2rem 0 0 15rem;
+            border: 2px solid #659DBD;
+            font-size: 1rem;
+            font-weight: bolder;
+        }
+    }
+</style>
+
+<div class="div-main main">
+    <!-- deleted clients details -->
+    <div class="d-none jumbotron">
+        <button class="btn-lg btn btn-danger">Warning !</button>
+        <p>Deleted documents may not be retrieved. Are you sure?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h1 class="main-heading clients-headings">Deleted Clients Details</h1>
+
+            {% if people|length < 1 %}
+            No client found!
+            {% else %}
+
+            <table class="table table-lg table-hover table-bordered">
+
+                <tr class="clients-headings ">
+                    <th>Business Name</th>
+                    <th>Customer Ref</th>
+                    <th>Client Name</th>
+                    <th></th>
+                    <th style="text-align:center; color:#cb4154;"><i class="fas fa-trash"></i></th>
+                </tr>
+                {% for p in people %}
+                <tr>
+                    <td>{{p.business_name}}</td>
+                    <td>{{p.customer_ref}}</td>
+                    <td>{{p.client_name}}</td>
+                    </td>
+                    <td>
+                        <button class="edit-btn" onclick="restoreEl(this)" id="restore_client" data-attribute="restore"
+                            data-value="{{p.pk}}">Restore</button>
+                    </td>
+                    <td>
+                        <button onclick="hideEl(this)" class="btn btn-outline-danger" id="delete_client"
+                            data-attribute="hide" data-value="{{p.pk}}">Delete</button>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- deleted suppliers details -->
+    <div data-aos="fade-up" data-aos-offset="200" data-aos-duration="1000" class="card suppliers-section">
+        <div class="card-body">
+            <h1 class="main-heading clients-headings">Deleted Suppliers Details</h1>
+
+            <table class="table table-lg table-hover table-bordered">
+                <tr class="clients-headings">
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th style="color:#cb4154;"><i class="fas fa-trash"></i></th>
+                </tr>
+
+                {% for esi in suppliers %}
+                <tr>
+                    <td>{{esi.supplierName}}</td>
+                    <td>{{esi.supplierContacts}}</td>
+                    <td>{{esi.supplierEmail}}</td>
+                    <td>
+                        <button class="edit-btn" onclick="restoreSup(this)" id="restore_supplier"
+                            data-attribute="restore" data-value="{{esi.pk}}">Restore</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger" onclick="deleteSup(this)" id="delete_supplier"
+                            data-attribute="hide_supplier" data-value="{{esi.pk}}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // hide clients details
+
+    function hideEl(button) {
+        const action = button.dataset.attribute
+        const value = button.dataset.value
+
+        const data = {
+            action: action,
+            value: value
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/hideClients",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (data, status, jqXHR) {
+                window.location.href = "/trash";
+            }
+        });
+        console.log(data);
+        console.log(`action: ${action} and value ${value}`)
+
+    }
+
+    // restore clients details
+    function restoreEl(button) {
+        const action = button.dataset.attribute
+        const value = button.dataset.value
+
+        const data = {
+            action: action,
+            value: value
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/restoreClient",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (data, status, jqXHR) {
+                window.location.href = "/trash";
+            }
+        });
+        console.log(data);
+
+        console.log(`action: ${action} and value ${value}`)
+    }
+
+    //hide clients details
+    function deleteSup(button) {
+        const action = button.dataset.attribute
+        const value = button.dataset.value
+
+        const data = {
+            action: action,
+            value: value
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/hideSuppliers",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (data, status, jqXHR) {
+                window.location.href = "/trash";
+            }
+        });
+        console.log(data);
+        console.log(`action: ${action} and value ${value}`)
+    }
+
+
+
+    // restore supplier data
+    function restoreSup(button) {
+        const action = button.dataset.attribute
+        const value = button.dataset.value
+
+        const data = {
+            action: action,
+            value: value
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/restoreSupplier",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (data, status, jqXHR) {
+                window.location.href = "/trash";
+            }
+        });
+        console.log(data);
+
+        console.log(`supplier's action: ${action} and supplier's value ${value}`)
+    }
+</script>
+
+{% endblock %}

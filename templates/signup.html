@@ -1,0 +1,53 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Roboto+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+
+<body>
+
+
+<div class="div-form">
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="flashes">
+    {{messages[0]}} Log in <a href ="{{url_for('login')}}">Here</a>
+</ul>
+{% endif %}
+{% endwith %}
+
+    <div class="container container-1">
+
+<form method ="POST" action ="{{url_for('signup')}}">
+
+    <h1 class="headers-special">SIGN UP</h1>
+
+      <br>
+      <input class="input-signup" type="text" name="full_name" placeholder="Full name" required>
+      <br><br>
+      <input class="input-signup" type="text" name="job_position" placeholder="Job position" required>
+      <br><br>
+      <input class="input-signup" type="email" name="email" placeholder="Email address" required>
+      <br><br>
+      <input class="input-signup" type="password" name="password" placeholder="Password" required>
+      <br><br>
+
+     <button class="btn-css headers-special" type="submit">Sign Up</button>
+        </form>
+    <br><br>
+    <p class="colored-white">
+        Already signed up. <a href="/login" class="headers-special a-colored">Log in here</a>
+    </p>
+
+    </div>
+
+    </div>
+</body>
+
+</html> -->

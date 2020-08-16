@@ -1,0 +1,351 @@
+@import url("https://fonts.googleapis.com/css?family=Work+Sans&display=swap");
+
+:root{
+--main-brown-color: #BD8265;
+--light-brown-color: #B49785;
+--background-color: #eff3f6;
+
+}
+
+body{
+    font-size: 16px;
+    font-family: "Work Sans", sans-serif;
+    background: #fff;
+}
+
+/* html{
+   scroll-behavior: smooth;
+} */
+
+* {
+    margin: 0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+
+  /** SIGN UP, LOGIN AND SUCCESS PAGE **/
+
+/** THE BUTTER COLOR IS FROM THE ADDCLIENT AND EDIT CLIENT BUTTON ICON, CLIENTS **/
+.a-colored, .butter-color
+{
+  color:var(--main-brown-color);
+}
+
+.clients-headings{
+  color:#00000094;
+}
+
+.a-colored:hover{
+  color:var(--main-brown-color);
+  cursor: pointer;
+}
+
+.btn-css{
+  background-color:var(--main-brown-color);
+  color:#fff;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.container-1{
+  position: absolute;
+  align-items: right;
+  margin: 100px;
+  max-width: 500px;
+  padding: 20px;
+
+}
+
+.colored-white{
+    color:#fff;
+}
+
+.div-form{
+  background-image: url("images/clu-soh-5wxWp2wVwQc-unsplash.jpg");
+  min-height: 800px;
+  height: 100%;
+  text-align: center;
+ /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.input-signup{
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+}
+
+.input-signup:focus{
+  background-color: #ddd;
+  outline: none;
+}
+
+
+                /** ADD CLIENT | EDIT CLIENT **/
+
+.button-plus{
+    background-color: #7bc67b;
+    color: white;
+    padding: 5px 15px;
+    border:none
+}
+
+.button-icon{
+    background-color:#cb4154;
+    color: white;
+     padding: 5px 15px;
+     border:none;
+}
+
+.btn-submit{
+  margin-top: 50px;
+  background-color: var(--main-brown-color);
+  color: white;
+  padding: 16px 16px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.chat-popup{
+  position: absolute;
+  z-index: 10;
+  left: 500px;
+  top:100%;
+  background: #fff;
+  box-shadow:  12px 12px 2px 1px rgba(0, 0, 255, .2);
+  padding: 1rem;
+  border-radius: 4px;
+  display: none;
+}
+
+.chat-popupSuppliers{
+  position: absolute;
+  z-index: 10;
+  left: 500px;
+  top:100%;
+  background: #fff;
+  box-shadow:  12px 12px 2px 1px rgba(0, 0, 255, .2);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+label{
+    font-weight: bolder;
+}
+
+.logo{
+    font-family: 'Noto Sans', sans-serif;
+    color:#fff;
+}
+
+/** THE MAIN BRINGS DOWN THE CLIENT FROM THE NAVIGATION FIXED TAB
+ **/
+.main{
+
+ padding: 50px 200px;
+    margin-left: 0;
+    margin-top: 50px;
+
+}
+
+/** NAVIGATION THINGS **/
+/* .navigation {
+  background-color: #5a3921;
+} */
+
+/* .navigation .navbar-nav .nav-item .nav-link {
+  color: #fff;
+  padding: 1.2rem;
+  font-size: 1rem;
+} */
+
+.navigation .logo {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-variant: small-caps;
+}
+
+.navbar-toggler {
+    background-color: #F1F1F1;
+    border-color: white;
+}
+/** NAVIGATION END**/
+
+.form-group label {
+  color: #666;
+  font-weight: 400;
+  font-size: 0.98rem;
+}
+
+.card {
+  border: 0;
+  box-shadow: 0px 10px 20px #888;
+    width: 100%;
+    /* 60rem */
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.paragraph{
+    font-size:16px;
+    line-height:2;
+}
+
+ .textarea{
+    width:100%;
+    height: 200px;
+}
+
+.flex {
+  display: flex;
+}
+
+ .justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+
+/** custom styling input
+
+.custom-file {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    margin: 0;
+   opacity: 2;
+} **/
+
+
+
+ /** CLIENTS TABLE **/
+
+
+
+  /** DASHBOARD CONTENT **/
+
+
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    flex-direction: row;
+
+}
+
+.flex-container-1, .flex-container-2, .flex-container-3{
+
+padding: 1.2rem;
+
+}
+
+ .flex-container-1{
+order:2;
+flex:1;
+}
+ .flex-container-2{
+order:3;
+flex:1;
+}
+
+.flex-container-3{
+order:1;
+flex:1;
+}
+
+.quill-wrap {
+  max-width:500px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20px;
+}
+
+.quill-wrap {
+  /** border: 1px solid #ccc !important; **/
+  border-radius:4px;
+  border: 2px solid #F1F1F1 !important;
+}
+.quill-wrap button, .quill-wrap {
+  margin-right:2px
+}
+
+#toolbar{
+background-color: #7bc67b;
+}
+
+#toolbar .ql-header {
+color:#FFF;
+}
+
+#toolbar .ql-font {
+color:#FFF;
+}
+
+                            /** REPORTS DIV DESIGNS #5a3921 **/
+
+.reports-title{
+padding: 10px;
+margin: 0 auto;
+border-radius:5px;
+
+}
+
+.reports-title input {
+border:none;
+}
+
+.reports-message{
+padding: 10px;
+margin: 0 auto;
+
+
+}
+
+#editor{
+width:100%;
+height: 300px;
+max-width:500px;
+border:none;
+
+}
+
+#editor:focus{
+outline-color: #7bc67b;
+
+}
+
+.reports-submit{
+
+padding: 10px;
+margin: 0 auto;
+}
+
+.reports-submit-button{
+  /**margin-top: 50px;**/
+  background-color: #7bc67b;
+  color: white;
+  /** padding: 16px 16px; **/
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+}

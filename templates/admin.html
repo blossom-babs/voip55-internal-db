@@ -1,0 +1,173 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul style="color:black;" class="flashes">
+    {{messages[0]}}
+</ul>
+{% endif %}
+{% endwith %}
+
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        max-width: 1100px;
+        margin: auto;
+    }
+</style>
+
+<div class="admin-index-container container-fluid div-main">
+    <h1 style="padding: 100px 50px 0;">Welcome, <small>{{full_name}}</small></h1>
+    <h1 class="d-none">Under Development</h1>
+
+    <div class="div-main admin-index-container-1 d-none">
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <button id="of-pending-confirms" class="btn-css headers-special">Pending Confirmations</button>
+            </div>
+            <div id="table-of-pending" class="container d-none">
+
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Job position</th>
+                        <th>
+                            <button type="button" id="btn-staff-confirm" class="btn btn-success btn-staff">Confirm
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" id="btn-staff-reject" class="btn btn-danger btn-staff">Reject</button>
+                        </th>
+                    </tr>
+
+                    {% for staff in staff_body %}
+
+
+                    <tr>
+                        <td>{{staff.full_name}}</td>
+                        <td>{{staff.email}}</td>
+                        <td>{{staff.job_position}}</td>
+                        <td style="text-align:center;">
+                        <input onclick="someFunc(this)" data-attribute="confirm"
+                                data-value="{{staff.pk}}" type="checkbox" 
+                                class="confirmStaffCheckbox" value="off"></td>
+                        <td style="text-align:center;">
+                            <input onclick="someFunc(this)" data-attribute="reject"
+                                data-value="{{staff.pk}}" type="checkbox" 
+                                class="rejectStaffCheckbox" value="off"></td>
+
+                    </tr>
+
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="admin-index-container-2">
+        <div class="card mb-4">
+            <div class="card-body">
+                <button id="reportsTab" class="btn btn-submit btn-md" style="margin-top:0;">Tasks</button>
+                <form id="tasks" method="post" action="/tasks">
+                    <div class="tasks-staff" style="margin-top:5px">
+
+                        <label for="staff-tasks">Choose a Staff:</label>
+
+                        <select name="staff__" id="staff-tasks">
+                            {% for staff in all_staff %}
+                            <option value="{{staff.pk}}">{{staff.full_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div> -->
+    <!--                the editor starts here-->
+    <!-- <div id="reportsTable" class="d-none">
+                        <div class="quill-wrap"> -->
+    <!-- Create the toolbar container -->
+
+    <!-- Create the editor container -->
+    <!-- 
+                            <div class="reports-title">
+                                <input type="input" name="tasks" placeholder="Task title">
+                            </div>
+                            <hr class="reports-rule">
+                            <div class="reports-message">
+                                <textarea id="editor" name="taskMessage" placeholder="Text goes here..."></textarea>
+
+                            </div>
+                            <div class="reports-submit">
+                                <button type="submit" class="btn btn-sm reports-submit-button" id="submitAjax">Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form> -->
+
+
+    <!--                the editor ends here-->
+    <!-- </div>
+
+        </div>
+
+    </div> -->
+
+    <!--    THIRD CONTAINER / DIV-->
+    <!-- <div class="admin-index-container-3">
+        <div class="card mb-4">
+            <div class="card-body">
+                <button class="btn btn-submit" style="margin-top:0;">Report</button>
+                {% for staff in all_staff %}
+                {% for report in daily_report %}
+                <div class="view-reports">
+                    <hr>
+                    <div class="view-reports-name">
+                        <label>Staff:</label>
+                        <span>{{staff.full_name}}</span>
+                    </div>
+                    <div class="view-reports-name">
+                        <label>Report:</label>
+                        <p>{{report.reportsMessage}}</p>
+                    </div>
+                    <hr>
+                </div>
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div> -->
+
+</div>
+
+<script>
+    const showPending = document.getElementById("of-pending-confirms");
+    showPending.addEventListener("click", () => {
+        console.log("pending tab got clicked!");
+
+        const pendingList = document.querySelector("#table-of-pending");
+
+        if (pendingList.classList.contains("d-none")) {
+            pendingList.classList.remove("d-none");
+            showPending.textContent = "Close Tab";
+        } else {
+            pendingList.classList.add("d-none");
+            showPending.textContent = "Pending Confirmations";
+        }
+    });
+</script>
+
+{% endblock %}

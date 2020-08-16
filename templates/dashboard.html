@@ -1,0 +1,145 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<!-- Responsiveness -->
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul style="color:black;" class="flashes">
+  {{messages[0]}}
+</ul>
+{% endif %}
+{% endwith %}
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    max-width: 1100px;
+    margin: auto;
+  }
+</style>
+
+<div class="container div-main main">
+  <h1 style="padding: 100px 50px 0" ;>
+    Welcome, <small>{{full_name}}</small></h1>
+    <h1 class="d-none">Under Development</h1>
+</div>
+
+
+
+<!-- <div class="flex-container"> -->
+
+  <!-- <div class="flex-container-1">
+    <div class="card mb-4">
+      <div class="card-body">
+        {% for task in tasks_data %}
+        <button class="btn btn-submit btn-md" style="margin-top:0;">Tasks</button>
+        <div class="view-reports">
+          <hr>
+          <div class="view-reports-name">
+            <label>Task Title:</label>
+            <span>{{task.tasks}}</span>
+          </div>
+          <div class="view-reports-name">
+            <label>Tasks:</label>
+            <p>{{task.tasksMessage}}</p>
+          </div>
+          <hr>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="flex-container-2">
+    <div class="card mb-4">
+      <div class="card-body">
+        {% for task in tasks_data %}
+        <p>Tasks</p>
+        {{task.tasks}}
+        <p>Message</p>
+        <p>{{task.tasksMessage}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="flex-container-3">
+    <div class="card mb-4">
+      <div class="card-body">
+        <button id="reportsTab" class="btn btn-submit btn-md" style="margin-top:0;">Reports</button>
+        <div id="reportsTable" class="d-none">
+          <div class="quill-wrap">
+            Create the toolbar container -->
+            <!-- <div id="toolbar">
+              <span class="ql-formats">
+                <select class="ql-header">
+                  <option value="1">Heading</option>
+                  <option value="2">Subheading</option>
+                  <option selected>Normal</option>
+                </select>
+                <select class="ql-font">
+                  <option selected>Sans Serif</option>
+                  <option value="serif">Serif</option>
+                  <option value="monospace">Monospace</option>
+                </select>
+              </span>
+              <span class="ql-formats">
+                <button class="ql-bold colored-white"></button>
+                <button class="ql-italic colored-white"></button>
+                <button class="ql-underline colored-white"></button>
+                <button class="ql-strike colored-white"></button>
+              </span>
+              <span class="ql-formats">
+                <select class="ql-color colored-white"></select>
+                <select class="ql-background colored-white"></select>
+              </span>
+              <span class="ql-formats">
+                <button class="ql-list colored-white" value="ordered"></button>
+                <button class="ql-list colored-white" value="bullet"></button>
+                <select class="ql-align colored-white">
+                  <option selected></option>
+                  <option value="center colored-white"></option>
+                  <option value="right colored-white"></option>
+                  <option value="justify colored-white"></option>
+                </select>
+              </span>
+              <span class="ql-formats">
+                <button class="ql-blockquote colored-white"></button>
+                <button class="ql-link colored-white"></button>
+              </span>
+            </div> -->
+
+            <!-- Create the editor container -->
+            <!-- <form id="report" method="post" action="/reports">
+                    <div class="reports-title">
+                    <input type ="input" name="reportsTitle" placeholder="reports title">
+                        </div>
+                    <hr class="reports-rule">
+<div class="reports-message">
+  <textarea id="editor" name="reportsMessage">Message</textarea>
+
+</div>
+                    <div class="reports-submit">
+                        <button type ="submit" class="btn btn-sm reports-submit-button" id="submitAjax">Send</button>
+                    </div>
+                </form>
+</div>
+                </div>
+        </div>
+        </div>
+</div>
+
+</div> -->
+
+            {% endblock %}

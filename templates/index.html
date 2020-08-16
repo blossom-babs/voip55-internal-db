@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        background: #659DBD;
+        color: #fff;
+    }
+
+    .index {
+        width: 40rem;
+        height: 35rem;
+        position: absolute;
+        bottom: 0;
+        top: 3rem;
+        right: 20px;
+        background: #fff;
+        color: #000;
+    }
+
+    .index__navbar {
+        padding-top: 6rem;
+        font-variant: small-caps;
+    }
+
+    .note {
+        background: #659DBD;
+        color: #fff;
+        width: 20rem;
+        margin: 0 auto;
+
+    }
+
+    .note p {
+        padding: 2rem;
+    }
+
+    .cta {
+        background: #659DBD;
+        color: #fff;
+        width: 10rem;
+        margin: 0 auto;
+        margin-top: 1rem;
+        border: 0;
+        padding: 1rem;
+    }
+
+
+    .cta a {
+        color: #fff;
+    }
+
+    .cta a:hover {
+        color: #000;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .cta--colored {
+        background: #BD8265;
+    }
+
+    .index__p {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .index__p:hover {
+        text-decoration: underline;
+        color: #BD8265;
+    }
+
+    .services {
+        position: absolute;
+        left: 5rem;
+        top: 5rem;
+        padding: 3rem;
+    }
+
+    .services i {
+        padding-right: 2rem;
+    }
+
+    .services h1 {
+        font-size: 3rem;
+    }
+
+    .services ul {
+        list-style-type: none;
+        padding-top: 2rem;
+
+    }
+
+    .services li {
+        padding-bottom: 3rem;
+    }
+
+    .flex-direction {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    @media (max-width:750px) {
+
+        .services {
+            display: none;
+        }
+
+        .index {
+            width: 25rem;
+            position: absolute;
+            height: 100%;
+            color: #000;
+            margin: 0 auto;
+
+        }
+
+    }
+
+    @media (min-width: 765px) {
+
+        .services {
+            position: absolute;
+            left: 5rem;
+            top: 5rem;
+            padding: 3rem;
+        }
+
+
+    }
+</style>
+<!--0069480897 sterling bank-->
+<!--{{ url_for('static', filename = image) }}-->
+<div class="container-fluid">
+    <div data-aos="fade-right" data-aos-offset="300" data-aos-duration="1500" class="services">
+        <h1>What We Do...</h1>
+        <ul>
+            <li><i class="fas fa-check"></i>PBX Plans</li>
+            <li><i class="fas fa-check"></i>VOIP Services</li>
+            <li><i class="fas fa-check"></i>Helpdesk Plans</li>
+            <li><i class="fas fa-check"></i>Hardware Services</li>
+        </ul>
+        <!--        this stack overflow helped to stop the problem linking images using jinja-->
+        <!--        https://stackoverflow.com/a/53438952/12716823 -->
+
+    </div>
+
+    <div data-aos="fade-left" data-aos-offset="300" data-aos-duration="1500" class="index">
+        <div class="flex-direction">
+            <div>
+                <img src="{{url_for('static', filename='images/e97f6e83-9fb3-4c6a-a262-82075504235d_200x200.png')}}">
+            </div>
+
+            <div class="index__navbar">Home</div>
+            <div class="index__navbar">Log out</div>
+        </div>
+
+        <div class="note">
+            <p>This is a password protected site.</p>
+        </div>
+
+        <p class="index__p">Visit our official website: thewordpresssite.com</p>
+
+        <div class="flex-direction">
+            <button class="cta">
+                <a href="/signupandlogin">Sign Up Here</a>
+            </button>
+
+            <button class="cta cta--colored">
+                <a href="/signupandlogin">Log In</a>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

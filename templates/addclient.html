@@ -1,0 +1,233 @@
+{% include 'layout.html' %}
+{% extends 'navbar.html' %}
+
+{% block body %}
+
+<style>
+    .card {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+        .card {
+            width: 500px;
+        }
+    }
+</style>
+
+<section id="addclient-section" class="div-main main">
+    <div class="container">
+
+        <form method="post" action="{{url_for('addclient')}}" id="form">
+
+            <!-- PERSONAL DETAILS -->
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="clients-headings">Personal details</h3>
+                    <p class="paragraph">Clients personal details should be entered here: <br>These are relevant
+                        information pertaining to the customer.</p>
+
+                    <div class="row mt-5">
+                        <div class="col-lg-6 ">
+
+                            <div class="form-group">
+                                <label class="">Business Name</label>
+                                <input class="form-control" type="text" name="business_name">
+                            </div>
+                            <div class="form-group">
+                                <label class="">Address</label>
+                                <input class="form-control" type="text" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" type="text" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Reference</label>
+                                <input class="form-control" type="text" name="customer_ref">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Telephone Number</label>
+                                <input class="form-control" type="text" name="telephone_num1">
+                            </div>
+                            <div class="form-group">
+                                <label>Telephone Number 2</label>
+                                <input class="form-control" type="text" name="telephone_num2">
+                            </div>
+                            <div class="form-group">
+                                <label>Telephone Number 3</label>
+                                <input class="form-control" type="text" name="telephone_num3">
+                            </div>
+                            <div class="form-group">
+                                <label>Client Name</label>
+                                <input class="form-control" type="text" name="client_name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2 - SERVICES PROVIDED  -->
+            <div data-aos="fade-left" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+                <div class="card-body">
+                    <div class="flex justify-content-between align-items-center">
+                        <h3 class="clients-headings">Services Provided </h3>
+                        <div>
+                            <button onclick="myCreateFunction()" type="button" class="button-plus"><i
+                                    class="fas fa-plus"></i></button>
+                            <button onclick="myDeleteFunction()" type="button" class="button-icon"><i
+                                    class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <hr><br>
+
+                    <p class="paragraph">Fill in the inputs with the appropriate service given to the customer as well
+                        as <br> the type
+                        of specific services we have with them</p>
+
+                    <table id="service_provided" class="tableid mt-4 w-100">
+                        <tr>
+                            <td><input class="form-control" type="text" name="name"></td>
+                            <td><input class="form-control" type="text" name="contract"></td>
+                            <td><input class="form-control" type="text" name="payg"></td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!--  CARD 3 PASSWORDS AND DOCUMENTATIONS                -->
+
+            <div data-aos="fade-right" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+                <div class="card-body">
+                    <div class="flex justify-content-between align-items-center">
+                        <h3 class="clients-headings">Passwords and Docs</h3>
+                        <div>
+                            <button onclick="myCreateFunction2()" type="button" class="button-plus"><i
+                                    class="fas fa-plus"></i></button>
+                            <button onclick="myDeleteFunction2()" type="button" class="button-icon"><i
+                                    class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <hr><br>
+
+                    <p class="paragraph">Passwords of services provided to clients as well as the documentations <br>
+                        or description of this service.</p>
+
+                    <table id="passwords" class="tableid2 mt-4 w-100">
+                        <tr>
+                            <td><input type="text" class="form-control" name="option_1"></td>
+                            <td><input type="text" class="form-control" name="option_2"></td>
+                            <td><input type="text" class="form-control" name="other_options"></td>
+
+
+                            <td><button onclick="openForm('demo_1')" type="button" class="btn btn-light">
+                                    <i class="fa fa-comment butter-color"></i> <em>Description</em></button></td>
+
+                            <td><input type="file" class="form-control" name="file_upload"></td>
+
+                            <td>
+                                <div class="chat-popup" id="demo_1">
+                                    <textarea class="textarea" name="description" placeholder="Description"></textarea>
+                                    <br>
+                                    <button onclick="closeForm('demo_1')" type="button"
+                                        class="btn btn-sm btn-outline-success">Done</button>
+                                </div>
+                            </td>
+                    </table>
+                </div>
+            </div>
+
+            <!--   CARD 4  HELP DESK | RECENT TASKS -->
+
+            <div data-aos="fade-right" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="clients-headings">Recent Tasks</h3>
+                        <div>
+                            <button onclick="myCreateFunction3()" type="button" class="button-plus"><i
+                                    class="fas fa-plus"></i></button>
+                            <button onclick="myDeleteFunction3()" type="button" class="button-icon"><i
+                                    class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <hr><br>
+                    <p class="paragraph">Help services Customers call in to get should be recorded here. <br>
+                        Detailed with the timeline, who was on duty as well as the help service rendered.</p>
+
+                    <table id="helpdesk_service" class="tableid3 mt-4 w-100">
+                        <tr class="trs">
+                            <td><input class="form-control" type="date" id="date-input" name="date"></td>
+                            <td><input class="form-control" type="text" name="staff_on_duty"></td>
+
+                            <td><button onclick="openForm('demoDesk_1')" type="button" class="btn btn-light"><i
+                                        class="fa fa-comment butter-color"></i> <em>Description</em></button></td>
+
+                            <td>
+                                <div class="chat-popup" id="demoDesk_1">
+                                    <textarea class="textarea" name="service_request"
+                                        placeholder="Password reset"></textarea>
+                                    <br>
+                                    <button onclick="closeForm('demoDesk_1')" type="button"
+                                        class="btn btn-sm btn-outline-success">Done</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!--  CARD 5 OFFICE DEVICES -->
+
+            <div data-aos="fade-left" data-aos-offset="200" data-aos-duration="1000" class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="clients-headings">Office Devices</h3>
+                        <div>
+                            <button onclick="myCreateFunction4()" type="button" class="button-plus add"
+                                data-id="od-group"><i class="fas fa-plus"></i></button>
+                            <button onclick="myDeleteFunction4()" type="button" class="button-icon remove"
+                                data-id="od-group"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <hr><br>
+                    <p>client's Office Devices eg. IP address, username and password for Printers, Fax, PBX, Phones,
+                        Internet routers, Firewall etc...</p>
+                    <table class="tableid4 mt-4 w-100" id="office_devices">
+                        <tr>
+                            <td><input class="form-control" type="text" name="device"></td>
+                            <td><input class="form-control" type="text" name="username"></td>
+                            <td><input class="form-control" type="text" name="password"></td>
+                            <td><button onclick="openForm('demoOffice_1')" type="button" class="btn btn-light"><i
+                                        class="fa fa-comment butter-color"></i>
+                                    <em>Configuration</em></button></td>
+                            <td>
+                                <div class="chat-popup" id="demoOffice_1">
+                                    <textarea class="textarea" name="configuration"
+                                        placeholder="Configuration box"></textarea>
+                                    <br>
+                                    <button onclick="closeForm('demoOffice_1')" type="button"
+                                        class="btn btn-sm btn-outline-success">Done</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+            <!--  SUBMIT BUTTON -->
+
+            <div class="mt-5">
+                <button type="submit" id="submitAjax" class="btn btn-lg btn-submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+{% endblock %}

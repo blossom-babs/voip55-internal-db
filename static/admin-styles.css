@@ -1,0 +1,64 @@
+.admin-index-container{
+    display: flex;
+    justify-content: space-between;
+align-items:flex-start;
+flex-direction: column;
+
+
+}
+
+.admin-index-container-1, .admin-index-container-2, .admin-index-container-3{
+
+padding: 1.2rem;
+
+}
+
+.admin-index-container-1{
+flex:1;
+order:1;
+}
+ .admin-index-container-2{
+flex:1;
+order:3;
+}
+
+.admin-index-container-3{
+flex:1;
+order:2;
+}
+
+.card {
+  box-shadow: 0 10px 20px #888888;
+  border: 0;
+  background-color: #fff;
+}
+
+
+.quill-wrap {
+  max-width:500px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20px;
+}
+
+.quill-wrap {
+  /** border: 1px solid #ccc !important; **/
+  border-radius:4px;
+  border: 2px solid #F1F1F1 !important;
+}
+.quill-wrap button, .quill-wrap {
+  margin-right:2px
+}
+
+ #toolbar{
+background-color: #f1f1f1;
+}
+
+#toolbar .ql-header {
+color:#000;
+}
+
+#toolbar .ql-font {
+color:#000;
+}
